@@ -1,48 +1,42 @@
 import { useState } from "react";
 
-export default function UserInput() {
-  const [form, setForm] = useState({
-    initial: "",
-    annual: "",
-    expectedReturn: "",
-    duration: "",
-  });
-
+export default function UserInput({ form, setForm }) {
   function handleChange(event) {
     setForm((prevForm) => {
       const updatedForm = {
         ...prevForm,
-        [event.target.name]: event.target.value,
+        [event.target.name]:
+          event.target.value !== "" ? +event.target.value : "",
       };
-      console.log(updatedForm);
+
       return updatedForm;
     });
   }
 
   return (
     <div id="user-input">
-      <div className="input-group">
-        <div>
+      <form className="input-group">
+        <p>
           <label>Initial investment</label>
           <input
             type="number"
             required
-            name="initial"
-            value={form.initial}
+            name="initialInvestment"
+            value={form.initialInvestment}
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
+        </p>
+        <p>
           <label>Annual investment</label>
           <input
             type="number"
             required
-            name="annual"
-            value={form.annual}
+            name="annualInvestment"
+            value={form.annualInvestment}
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
+        </p>
+        <p>
           <label>Expected return</label>
           <input
             type="number"
@@ -51,8 +45,8 @@ export default function UserInput() {
             value={form.expectedReturn}
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
+        </p>
+        <p>
           <label>Duration</label>
           <input
             type="number"
@@ -61,8 +55,8 @@ export default function UserInput() {
             value={form.duration}
             onChange={handleChange}
           ></input>
-        </div>
-      </div>
+        </p>
+      </form>
     </div>
   );
 }
